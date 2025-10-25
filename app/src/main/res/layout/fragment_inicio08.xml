@@ -121,7 +121,7 @@
                 android:id="@+id/npHora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/AppTheme.NumberPicker"/>
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,8 +136,7 @@
             <NumberPicker
                 android:id="@+id/npMinuto"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/AppTheme.NumberPicker"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </LinearLayout>

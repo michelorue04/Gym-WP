@@ -34,9 +34,6 @@ public class registra extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // 2. Enlazar las variables con los IDs del archivo XML
-        editTextNombre = view.findViewById(R.id.editTextNombre);
-        editTextEmail = view.findViewById(R.id.editTextEmail);
         editTextPassword = view.findViewById(R.id.editTextPassword);
         btnRegistrar = view.findViewById(R.id.btnRegistrar);
 

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/registra"
+        android:name="josepardo.edu.pe.gymwp.ui.registra"
+        android:label="fragment_registra"
+        tools:layout="@layout/fragment_registra" />
+    <fragment
+        android:id="@+id/login"
+        android:name="josepardo.edu.pe.gymwp.ui.login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_inicio01"
+            app:destination="@id/inicio01" />
+        <action
+            android:id="@+id/action_login_to_registra"
+            app:destination="@id/registra" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio01"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio01"
+        android:label="fragment_inicio01"
+        tools:layout="@layout/fragment_inicio01" >
+        <action
+            android:id="@+id/action_inicio01_to_inicio02"
+            app:destination="@id/inicio02" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio02"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio02"
+        android:label="fragment_inicio02"
+        tools:layout="@layout/fragment_inicio02" >
+        <action
+            android:id="@+id/action_inicio02_to_inicio03"
+            app:destination="@id/inicio03" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio03"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio03"
+        android:label="fragment_inicio03"
+        tools:layout="@layout/fragment_inicio03" >
+        <action
+            android:id="@+id/action_inicio03_to_inicio04"
+            app:destination="@id/inicio04" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio04"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio04"
+        android:label="fragment_inicio04"
+        tools:layout="@layout/fragment_inicio04" >
+        <action
+            android:id="@+id/action_inicio04_to_inicio05"
+            app:destination="@id/inicio05" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio05"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio05"
+        android:label="fragment_inicio05"
+        tools:layout="@layout/fragment_inicio05" >
+        <action
+            android:id="@+id/action_inicio05_to_inicio06"
+            app:destination="@id/inicio06" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio06"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio06"
+        android:label="fragment_inicio06"
+        tools:layout="@layout/fragment_inicio06" >
+        <action
+            android:id="@+id/action_inicio06_to_inicio07"
+            app:destination="@id/inicio07" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio07"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio07"
+        android:label="fragment_inicio07"
+        tools:layout="@layout/fragment_inicio07" >
+        <action
+            android:id="@+id/action_inicio07_to_inicio08"
+            app:destination="@id/inicio08" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio08"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio08"
+        android:label="fragment_inicio08"
+        tools:layout="@layout/fragment_inicio08" >
+        <action
+            android:id="@+id/action_inicio08_to_inicio09"
+            app:destination="@id/inicio09" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio09"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio09"
+        android:label="fragment_inicio09"
+        tools:layout="@layout/fragment_inicio09" >
+        <action
+            android:id="@+id/action_inicio09_to_inicio10"
+            app:destination="@id/inicio10" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio10"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio10"
+        android:label="fragment_inicio10"
+        tools:layout="@layout/fragment_inicio10" >
+        <action
+            android:id="@+id/action_inicio10_to_inicio11"
+            app:destination="@id/inicio11" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio11"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio11"
+        android:label="fragment_inicio11"
+        tools:layout="@layout/fragment_inicio11" >
+        <action
+            android:id="@+id/action_inicio11_to_inicio12"
+            app:destination="@id/inicio12" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio12"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio12"
+        android:label="fragment_inicio12"
+        tools:layout="@layout/fragment_inicio12" >
+        <action
+            android:id="@+id/action_inicio12_to_inicio13"
+            app:destination="@id/inicio13" />
+    </fragment>
+    <fragment
+        android:id="@+id/inicio13"
+        android:name="josepardo.edu.pe.gymwp.ui.inicio13"
+        android:label="fragment_inicio13"
+        tools:layout="@layout/fragment_inicio13" />
+</navigation>

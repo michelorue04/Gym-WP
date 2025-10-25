@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="24dp"
+    tools:context=".ui.registra">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_centerInParent="true">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Es bueno verte otra vez :)"
+        android:textColor="@android:color/black"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="Inicia sesión con tu cuenta"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGoogle"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:text="Continuar con Google"
+        android:textColor="@android:color/black"
+        app:icon="@drawable/ic_google"
+        app:iconTint="@null"
+        app:iconPadding="16dp"
+        app:cornerRadius="24dp"
+        app:strokeColor="#E0E0E0"/> <com.google.android.material.button.MaterialButton
+    android:id="@+id/buttonFacebook"
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:paddingVertical="12dp"
+    android:text="Continuar con Facebook"
+    android:textColor="@android:color/black"
+    app:icon="@drawable/ic_facebook"
+    app:iconTint="@null"
+    app:iconPadding="16dp"
+    app:cornerRadius="24dp"
+    app:strokeColor="#E0E0E0"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonEmail"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingVertical="12dp"
+        android:text="Continuar com el E-mail"
+        android:textColor="@android:color/black"
+        app:icon="@drawable/ic_email"
+        app:iconTint="@null"
+        app:iconPadding="16dp"
+        app:cornerRadius="24dp"
+        app:strokeColor="#E0E0E0"/>
+
+</LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewLegal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Al continuar, acepta nuestros Términos de uso y Políticas de privacidad."
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+
+</RelativeLayout>

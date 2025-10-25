@@ -8,7 +8,6 @@
     android:padding="24dp"
     android:background="@android:color/white"
     tools:context=".ui.inicio05">
-
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="wrap_content"

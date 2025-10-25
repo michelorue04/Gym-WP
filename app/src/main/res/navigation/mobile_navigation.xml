@@ -3,17 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/inicio">
-
-    <fragment
-        android:id="@+id/inicio"
-        android:name="josepardo.edu.pe.gymwp.ui.inicio"
-        android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" >
-        <action
-            android:id="@+id/action_inicio_to_login"
-            app:destination="@id/login" />
-    </fragment>
+    app:startDestination="@id/login">
 
     <fragment
         android:id="@+id/registra"
@@ -32,8 +22,6 @@
             android:id="@+id/action_login_to_registra"
             app:destination="@id/registra" />
     </fragment>
-
-
     <fragment
         android:id="@+id/inicio01"
         android:name="josepardo.edu.pe.gymwp.ui.inicio01"
@@ -42,9 +30,6 @@
         <action
             android:id="@+id/action_inicio01_to_inicio02"
             app:destination="@id/inicio02" />
-        <action
-            android:id="@+id/action_inicio01_to_login"
-            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/inicio02"
@@ -148,25 +133,6 @@
     <fragment
         android:id="@+id/inicio13"
         android:name="josepardo.edu.pe.gymwp.ui.inicio13"
-        android:label="fragment_inicio13">
-        <action
-            android:id="@+id/action_inicio13_to_inicio14"
-            app:destination="@id/inicio14" />
-    </fragment>
-    <fragment
-        android:id="@+id/inicio14"
-        android:name="josepardo.edu.pe.gymwp.ui.inicio14"
-        android:label="fragment_inicio14"
-        tools:layout="@layout/fragment_inicio14" >
-        <action
-            android:id="@+id/action_inicio14_to_inicio15"
-            app:destination="@id/inicio15" />
-    </fragment>
-    <fragment
-        android:id="@+id/inicio15"
-        android:name="josepardo.edu.pe.gymwp.ui.inicio15"
-        android:label="fragment_inicio15"
-        tools:layout="@layout/fragment_inicio15" />
-
-
+        android:label="fragment_inicio13"
+        tools:layout="@layout/fragment_inicio13" />
 </navigation>

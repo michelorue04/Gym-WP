@@ -1,3 +1,4 @@
+// Archivo: login.java
 package josepardo.edu.pe.gymwp.ui;
 
 import android.os.Bundle;
@@ -5,35 +6,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
+// (Importa también TextInputEditText, etc., si necesitas leer los valores)
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import josepardo.edu.pe.gymwp.R;
-
-// NOTA: Se han eliminado los imports de Google y Facebook ya que no se usarán activamente por ahora.
-// Se pueden volver a añadir cuando actives esas funciones.
+import androidx.navigation.Navigation;
+import josepardo.edu.pe.gymwp.R; // Asegúrate de importar tu R
 
 public class login extends Fragment {
 
-    // Vistas de la UI
-    private EditText editTextUser, editTextPassword;
-    private Button btnLogin, btnCrearCuenta;
-    private ImageButton btnGoogle, btnFacebook, btnGitHub;
-    private CheckBox checkBoxRememberMe;
-    private TextView textViewForgotPassword;
+    // Declaramos los botones con los IDs de tu XML
+    Button btnLogin;
+    Button btnCrearCuenta;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Se crea la vista del fragmento a partir del archivo XML.
+        // Infla el layout que proporcionaste
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -41,84 +30,35 @@ public class login extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // 1. Enlazar las vistas con sus IDs del XML
-        initializeViews(view);
+        // --- Navegación a inicio01 (Iniciar Sesión) ---
 
-        // 2. Configurar los listeners para los botones
-        setupClickListeners();
-    }
+        // 1. Encuentra el botón de Iniciar Sesión por su ID correcto
+        btnLogin = view.findViewById(R.id.btnLogin); // ID Corregido
 
-    /**
-     * Inicializa todas las vistas del fragmento.
-     */
-    private void initializeViews(View view) {
-        editTextUser = view.findViewById(R.id.editTextUser);
-        editTextPassword = view.findViewById(R.id.editTextPassword);
-        btnLogin = view.findViewById(R.id.btnLogin);
-        btnCrearCuenta = view.findViewById(R.id.btnCrearCuenta);
-        btnGoogle = view.findViewById(R.id.btnGoogle);
-        btnFacebook = view.findViewById(R.id.btnFacebook);
-        btnGitHub = view.findViewById(R.id.btnGitHub);
-        checkBoxRememberMe = view.findViewById(R.id.checkBoxRememberMe);
-        textViewForgotPassword = view.findViewById(R.id.textViewForgotPassword);
-    }
+        btnLogin.setOnClickListener(v -> {
 
-    /**
-     * Configura todos los OnClickListeners para los elementos interactivos.
-     */
-    private void setupClickListeners() {
-        // --- Listener para el botón de Iniciar Sesión (tradicional) ---
-        // ESTA FUNCIÓN ESTÁ ACTIVA
-        btnLogin.setOnClickListener(v -> handleTraditionalLogin());
+            // --- ¡IMPORTANTE! ---
+            // Aquí deberías añadir tu lógica para validar el email y la contraseña
+            // que el usuario escribió.
+            // String email = view.findViewById(R.id.editTextUser).getText().toString();
+            // String password = view.findViewById(R.id.editTextPassword).getText().toString();
+            //
+            // if (validar(email, password)) { ... }
+            // --- Fin de la validación ---
 
-        // --- Listener para el botón de Crear Cuenta ---
-        // ESTA FUNCIÓN ESTÁ ACTIVA
-        btnCrearCuenta.setOnClickListener(v -> {
-            // Navega hacia el fragmento de registro
-            NavHostFragment.findNavController(this).navigate(R.id.action_login_to_registra);
+            // Si la validación es exitosa, navega a la siguiente pantalla
+            Navigation.findNavController(v).navigate(R.id.action_login_to_inicio01);
         });
 
-        // --- Listeners para inicio de sesión con redes sociales ---
-        // ESTAS FUNCIONES ESTÁN DESACTIVADAS TEMPORALMENTE
-        View.OnClickListener socialLoginComingSoon = v ->
-                Toast.makeText(getContext(), "Función disponible próximamente", Toast.LENGTH_SHORT).show();
 
-        btnGoogle.setOnClickListener(socialLoginComingSoon);
-        btnFacebook.setOnClickListener(socialLoginComingSoon);
-        btnGitHub.setOnClickListener(socialLoginComingSoon);
+        // --- Navegación a registra (Crear Cuenta) ---
 
-        // --- Listener para "Olvidé mi contraseña" ---
-        textViewForgotPassword.setOnClickListener(v ->
-                Toast.makeText(getContext(), "¿Necesitas ayuda para recuperar tu cuenta?", Toast.LENGTH_SHORT).show()
-        );
-    }
+        // 2. Encuentra el botón de Crear Cuenta por su ID correcto
+        btnCrearCuenta = view.findViewById(R.id.btnCrearCuenta); // ID Corregido
 
-    /**
-     * Valida y procesa el inicio de sesión con usuario y contraseña.
-     */
-    private void handleTraditionalLogin() {
-        String user = editTextUser.getText().toString().trim();
-        String pass = editTextPassword.getText().toString().trim();
-
-        if (user.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(getContext(), "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // --- SIMULACIÓN DE LOGIN EXITOSO ---
-        // Aquí va tu lógica real para validar las credenciales con tu base de datos.
-        // Por ahora, siempre será exitoso si los campos no están vacíos.
-        Toast.makeText(getContext(), "¡Bienvenido de vuelta!", Toast.LENGTH_SHORT).show();
-        navigateToHome();
-    }
-
-    /**
-     * Navega a la pantalla principal de la aplicación.
-     */
-    private void navigateToHome() {
-        // Comprueba si el fragmento está añadido a la actividad antes de navegar para evitar crashes.
-        if (isAdded()) {
-            NavHostFragment.findNavController(this).navigate(R.id.action_login_to_inicio01);
-        }
+        btnCrearCuenta.setOnClickListener(v -> {
+            // Llama a la acción para ir a registra
+            Navigation.findNavController(v).navigate(R.id.action_login_to_registra);
+        });
     }
 }

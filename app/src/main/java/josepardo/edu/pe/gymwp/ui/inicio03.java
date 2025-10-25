@@ -1,66 +1,146 @@
 package josepardo.edu.pe.gymwp.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import com.google.android.material.card.MaterialCardView;
 import josepardo.edu.pe.gymwp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link inicio03#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class inicio03 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MaterialCardView cardBalanceado, cardPecho, cardEspalda, cardBrazos, cardPiernas, cardAbdomen, cardGluteos;
+    private Button btnContinuar;
+    private String opcionSeleccionada = null;
 
     public inicio03() {
-        // Required empty public constructor
+        // Constructor vacío requerido
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment inicio03.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static inicio03 newInstance(String param1, String param2) {
-        inicio03 fragment = new inicio03();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_inicio03, container, false);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Referencias de las tarjetas
+        cardBalanceado = view.findViewById(R.id.cardBalanceado);
+        cardPecho = view.findViewById(R.id.cardPecho);
+        cardEspalda = view.findViewById(R.id.cardEspalda);
+        cardBrazos = view.findViewById(R.id.cardBrazos);
+        cardPiernas = view.findViewById(R.id.cardPiernas);
+        cardAbdomen = view.findViewById(R.id.cardAbdomen);
+        cardGluteos = view.findViewById(R.id.cardGluteos);
+
+        btnContinuar = view.findViewById(R.id.btnContinuar);
+
+        // Configurar los listeners de cada tarjeta
+        cardBalanceado.setOnClickListener(v -> seleccionarOpcion("Balanceado"));
+        cardPecho.setOnClickListener(v -> seleccionarOpcion("Pecho"));
+        cardEspalda.setOnClickListener(v -> seleccionarOpcion("Espalda"));
+        cardBrazos.setOnClickListener(v -> seleccionarOpcion("Brazos"));
+        cardPiernas.setOnClickListener(v -> seleccionarOpcion("Piernas"));
+        cardAbdomen.setOnClickListener(v -> seleccionarOpcion("Abdomen"));
+        cardGluteos.setOnClickListener(v -> seleccionarOpcion("Glúteos"));
+
+        // Botón continuar
+        btnContinuar.setOnClickListener(v -> {
+            if (opcionSeleccionada == null) {
+                Toast.makeText(getContext(), "Selecciona un grupo muscular para continuar.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Has elegido: " + opcionSeleccionada, Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(this).navigate(R.id.action_inicio03_to_inicio04);
+            }
+        });
+
+        // Botón volver (ivBack)
+        View ivBack = view.findViewById(R.id.ivBack);
+        if (ivBack != null) {
+            ivBack.setOnClickListener(v -> NavHostFragment.findNavController(this).popBackStack());
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inicio03, container, false);
+    /**
+     * Marca una opción como seleccionada y actualiza los colores de las tarjetas.
+     */
+    private void seleccionarOpcion(String opcion) {
+        opcionSeleccionada = opcion;
+
+        // Restaurar colores por defecto
+        resetearColores();
+
+        int colorNaranja = getResources().getColor(R.color.colorNaranja);
+        int colorFondo = getResources().getColor(R.color.colorNaranjaFondo);
+
+        switch (opcion) {
+            case "Balanceado":
+                cardBalanceado.setStrokeColor(colorNaranja);
+                cardBalanceado.setCardBackgroundColor(colorFondo);
+                break;
+            case "Pecho":
+                cardPecho.setStrokeColor(colorNaranja);
+                cardPecho.setCardBackgroundColor(colorFondo);
+                break;
+            case "Espalda":
+                cardEspalda.setStrokeColor(colorNaranja);
+                cardEspalda.setCardBackgroundColor(colorFondo);
+                break;
+            case "Brazos":
+                cardBrazos.setStrokeColor(colorNaranja);
+                cardBrazos.setCardBackgroundColor(colorFondo);
+                break;
+            case "Piernas":
+                cardPiernas.setStrokeColor(colorNaranja);
+                cardPiernas.setCardBackgroundColor(colorFondo);
+                break;
+            case "Abdomen":
+                cardAbdomen.setStrokeColor(colorNaranja);
+                cardAbdomen.setCardBackgroundColor(colorFondo);
+                break;
+            case "Glúteos":
+                cardGluteos.setStrokeColor(colorNaranja);
+                cardGluteos.setCardBackgroundColor(colorFondo);
+                break;
+        }
+    }
+
+    /**
+     * Restaura todas las tarjetas a su color gris por defecto.
+     */
+    private void resetearColores() {
+        int grisFondo = getResources().getColor(R.color.colorGrisFondo);
+        int transparente = getResources().getColor(android.R.color.transparent);
+
+        cardBalanceado.setCardBackgroundColor(grisFondo);
+        cardBalanceado.setStrokeColor(transparente);
+
+        cardPecho.setCardBackgroundColor(grisFondo);
+        cardPecho.setStrokeColor(transparente);
+
+        cardEspalda.setCardBackgroundColor(grisFondo);
+        cardEspalda.setStrokeColor(transparente);
+
+        cardBrazos.setCardBackgroundColor(grisFondo);
+        cardBrazos.setStrokeColor(transparente);
+
+        cardPiernas.setCardBackgroundColor(grisFondo);
+        cardPiernas.setStrokeColor(transparente);
+
+        cardAbdomen.setCardBackgroundColor(grisFondo);
+        cardAbdomen.setStrokeColor(transparente);
+
+        cardGluteos.setCardBackgroundColor(grisFondo);
+        cardGluteos.setStrokeColor(transparente);
     }
 }

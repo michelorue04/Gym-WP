@@ -46,7 +46,6 @@ public class registra extends Fragment {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-                // Validar que los campos no estén vacíos (ejemplo básico)
                 if (nombre.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                 } else {

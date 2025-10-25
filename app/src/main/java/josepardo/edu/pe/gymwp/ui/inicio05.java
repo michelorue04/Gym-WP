@@ -1,66 +1,93 @@
 package josepardo.edu.pe.gymwp.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.card.MaterialCardView;
 
 import josepardo.edu.pe.gymwp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link inicio05#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class inicio05 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MaterialCardView cardGimnasioBasico, cardGimnasioAvanzado;
+    private Button btnContinuar;
+    private MaterialCardView selectedCard = null; // Guarda la tarjeta seleccionada
 
     public inicio05() {
-        // Required empty public constructor
+        // Constructor vacío requerido
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_inicio05, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // 🔹 1. Enlazar vistas
+        cardGimnasioBasico = view.findViewById(R.id.cardGimnasioBasico);
+        cardGimnasioAvanzado = view.findViewById(R.id.cardGimnasioAvanzado);
+        btnContinuar = view.findViewById(R.id.btnContinuar);
+
+        // 🔹 2. Configurar selección de tarjetas
+        setupCardSelection(cardGimnasioBasico);
+        setupCardSelection(cardGimnasioAvanzado);
+
+        // 🔹 3. Acción del botón Continuar
+        btnContinuar.setOnClickListener(v -> {
+            if (selectedCard == null) {
+                android.widget.Toast.makeText(getContext(),
+                        "Por favor selecciona una opción",
+                        android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                // Navegar al siguiente fragmento
+                NavHostFragment.findNavController(this).navigate(R.id.action_inicio05_to_inicio06);
+            }
+        });
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment inicio05.
+     * Configura el comportamiento al hacer clic en una tarjeta
      */
-    // TODO: Rename and change types and number of parameters
-    public static inicio05 newInstance(String param1, String param2) {
-        inicio05 fragment = new inicio05();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void setupCardSelection(MaterialCardView card) {
+        card.setOnClickListener(v -> {
+            // Desmarcar la tarjeta anterior (si existía)
+            if (selectedCard != null && selectedCard != card) {
+                resetCardStyle(selectedCard);
+            }
+
+            // Marcar la nueva tarjeta seleccionada
+            selectedCard = card;
+            applySelectedStyle(card);
+        });
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    /**
+     * Aplica el estilo de selección (resaltado)
+     */
+    private void applySelectedStyle(MaterialCardView card) {
+        card.setCardBackgroundColor(getResources().getColor(R.color.colorNaranjaFondo));
+        card.setStrokeColor(getResources().getColor(R.color.colorNaranja));
+        card.setStrokeWidth(3);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inicio05, container, false);
+    /**
+     * Restaura el estilo normal (sin selección)
+     */
+    private void resetCardStyle(MaterialCardView card) {
+        card.setCardBackgroundColor(getResources().getColor(R.color.colorGrisFondo));
+        card.setStrokeWidth(0);
     }
 }

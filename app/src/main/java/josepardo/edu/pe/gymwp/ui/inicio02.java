@@ -1,66 +1,101 @@
 package josepardo.edu.pe.gymwp.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import com.google.android.material.card.MaterialCardView;
 import josepardo.edu.pe.gymwp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link inicio02#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class inicio02 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MaterialCardView cardHipertrofia, cardDefinicion, cardPerderPeso;
+    private Button btnComenzar;
+    private String opcionSeleccionada = null; // Guarda la selección del usuario
 
     public inicio02() {
-        // Required empty public constructor
+        // Constructor vacío requerido
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment inicio02.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static inicio02 newInstance(String param1, String param2) {
-        inicio02 fragment = new inicio02();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_inicio02, container, false);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Enlazar vistas
+        cardHipertrofia = view.findViewById(R.id.cardHipertrofia);
+        cardDefinicion = view.findViewById(R.id.cardDefinicion);
+        cardPerderPeso = view.findViewById(R.id.cardPerderPeso);
+        btnComenzar = view.findViewById(R.id.btnComenzar);
+
+        // Listeners de selección de tarjeta
+        cardHipertrofia.setOnClickListener(v -> seleccionarOpcion("Hipertrofia"));
+        cardDefinicion.setOnClickListener(v -> seleccionarOpcion("Definición"));
+        cardPerderPeso.setOnClickListener(v -> seleccionarOpcion("Perder peso"));
+
+        // Listener del botón "Comenzar"
+        btnComenzar.setOnClickListener(v -> {
+            if (opcionSeleccionada == null) {
+                Toast.makeText(getContext(), "Selecciona una opción antes de continuar.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Opción elegida: " + opcionSeleccionada, Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(this).navigate(R.id.action_inicio02_to_inicio03);
+            }
+        });
+    }
+
+    private void seleccionarOpcion(String opcion) {
+        opcionSeleccionada = opcion;
+
+        // Restaurar colores por defecto
+        resetearColores();
+
+        // Resaltar la tarjeta seleccionada
+        int colorNaranja = getResources().getColor(R.color.colorNaranja);
+        int colorFondo = getResources().getColor(R.color.colorNaranjaFondo);
+
+        switch (opcion) {
+            case "Hipertrofia":
+                cardHipertrofia.setStrokeColor(colorNaranja);
+                cardHipertrofia.setCardBackgroundColor(colorFondo);
+                break;
+            case "Definición":
+                cardDefinicion.setStrokeColor(colorNaranja);
+                cardDefinicion.setCardBackgroundColor(colorFondo);
+                break;
+            case "Perder peso":
+                cardPerderPeso.setStrokeColor(colorNaranja);
+                cardPerderPeso.setCardBackgroundColor(colorFondo);
+                break;
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inicio02, container, false);
+    /**
+     * Restaura las tarjetas a su color base.
+     */
+    private void resetearColores() {
+        int grisFondo = getResources().getColor(R.color.colorGrisFondo);
+        int transparente = getResources().getColor(android.R.color.transparent);
+
+        cardHipertrofia.setCardBackgroundColor(grisFondo);
+        cardHipertrofia.setStrokeColor(transparente);
+
+        cardDefinicion.setCardBackgroundColor(grisFondo);
+        cardDefinicion.setStrokeColor(transparente);
+
+        cardPerderPeso.setCardBackgroundColor(grisFondo);
+        cardPerderPeso.setStrokeColor(transparente);
     }
 }
